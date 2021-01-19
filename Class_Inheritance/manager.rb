@@ -1,10 +1,15 @@
     require_relative 'employee.rb'
 
-class Manager
+class Manager < Employee
 
-    def initialize
+    def initialize(name, title, salary, boss, employees)
         @employees = []
     end
+
+    def add_employees(employee)
+        @employees << employee
+    end
+
 
 
 end
