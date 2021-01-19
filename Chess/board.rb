@@ -27,10 +27,13 @@ class Board
     def move_piece(color, start_pos, end_pos)
         if self[start_pos].empty? 
             raise 'invalid start position'
-            
-            !valid_moves.include?(end_pos)   
+            retry
+        elsif !valid_moves.include?(end_pos)
+            raise 'invalid end position'
+            retry
+        else
             self[start_pos], self[end_pos] = self[end_pos], self[start_pos]
-
+        end
     end
 
     def move_piece!(color, start_pos, end_pos)
