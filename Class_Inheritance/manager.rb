@@ -1,9 +1,10 @@
     require_relative 'employee.rb'
 
 class Manager < Employee
+    attr_reader :employees
 
     def initialize(name, title, salary, boss = nil)
-        super (name,title,salary,boss)        
+        super(name, title, salary, boss)        
         @employees = []
     end
 
@@ -12,6 +13,14 @@ class Manager < Employee
         @employees << employee
     end
 
+    def employees_salaries
+        salaries = []
 
+        @employees.each do |employee| 
+            salaries += employee.salary
+        end
+        
+        salaries
+    end
 
 end

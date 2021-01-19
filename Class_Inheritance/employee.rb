@@ -11,10 +11,10 @@ class Employee
 
 
     def bonus(multiplier)
-        if !@title.include?('manager')
-            @salary * multiplier
+        if self.is_a?(Manager)
+            self.employees_salaries * multiplier
         else
-            self.employees.salary.inject { |acc, el| acc + el } * multiplier
+            @salary * multiplier
         end
     end
 
