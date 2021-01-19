@@ -1,7 +1,8 @@
 class Employee
-    attr_reader :name, :title, :salary, :boss
+    attr_reader :name, :title, :salary
+    attr_accessor :boss
 
-    def initialize(name, title, salary, boss)
+    def initialize(name, title, salary, boss = nil)
         @name = name
         @salary = salary
         @title = title
@@ -10,7 +11,7 @@ class Employee
 
 
     def bonus(multiplier)
-        if !@title.include?('manager').capitalize
+        if !@title.include?('manager')
             @salary * multiplier
         else
             self.employees.salary.inject { |acc, el| acc + el } * multiplier
