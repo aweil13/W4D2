@@ -14,13 +14,19 @@ class Manager < Employee
     end
 
     def employees_salaries
+        total = 0
         salaries = []
 
         @employees.each do |employee| 
-            salaries += employee.salary
+            salaries << employee.salary
+            if !employee.employees.nil?
+                employee.employees.each do |sub-employee|
+                    salaries << sub_employee.salary
+                end
+            end
         end
         
-        salaries
+        total
     end
 
 end
