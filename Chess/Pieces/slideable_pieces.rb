@@ -18,21 +18,24 @@ module Slideable
 end
 
 
-class Rook # horizontal
+class Rook < Piece # horizontal
+    include Slideable
     def initialize
         @rook = :R
     end
 end
 
 
-class Queen # both
+class Queen < Piece# both
+    include Slideable
     def initialize
         @queen = :Q
     end
 end
 
 
-class Bishop # diagonal
+class Bishop < Piece # diagonal
+    include Slideable
     def initialize
         @bishop = :B
     end
