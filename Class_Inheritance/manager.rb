@@ -15,17 +15,12 @@ class Manager < Employee
 
     def employees_salaries
         total = 0
-        salaries = []
-
-        @employees.each do |employee| 
-            salaries << employee.salary
-            if !employee.employees.nil?
-                employee.employees.each do |sub-employee|
-                    salaries << sub_employee.salary
-                end
-            end
+        salaries = @employees.dup
+        until salaries.empty?
+            employee = salaries.shift
+            total += employee.salary
+            salaries.concat(employee.employees)  if employee.is_a?(Manager)           
         end
-        
         total
     end
 
