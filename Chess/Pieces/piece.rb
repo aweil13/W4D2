@@ -20,7 +20,7 @@ class Piece
     end
 
     def valid_moves # return an array
-        
+        self.moves
     end
 
     def symbol
