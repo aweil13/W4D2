@@ -40,5 +40,8 @@ class Board
 
     end
 
+    def valid_pos?(pos)
+        
+    end
 
 end

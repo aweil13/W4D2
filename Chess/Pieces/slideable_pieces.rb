@@ -58,9 +58,19 @@ module Slideable
         # this helper method is only responsible for collecting all moves in a given direction
         # the given direction is represented by two args, the combination of a dx and dy
         def grow_unblocked_moves_in_dir(dx, dy)
-             moves_arr = []                                  # create an array to collect moves
-                
-                                        # get the piece's current row and current column
+            moves_arr = [] # create an array to collect moves
+            
+            possible_moves = [[dx, dy]]
+              HORIZONTAL_DIRS.each do |pos| 
+                current_pos = [dx, dy]
+                row, col = pos 
+                until !valid_pos?(possible_moves[-1])
+                  current_pos = [dx + row, dy + col]
+                  possible_moves << current_pos
+                end
+                possible_moves.pop if !valid_pos?(possible_moves[-1])
+                end
+            end                            # get the piece's current row and current column
                                     
                                         # in a loop:
                                             # continually increment the piece's current row and current column to generate a new position
