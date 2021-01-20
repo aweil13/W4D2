@@ -1,6 +1,10 @@
 require_relative "piece.rb"
 
 class Board
+
+    BACK_ROW = [ 
+        Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook
+    ].freeze
     
     def populate
         @board.map_with_index do |row, idx|
@@ -11,7 +15,7 @@ class Board
     end
 
     def initialize
-        @board = Array.new(8) { Array.new(8) }
+        @board = Array.new(8) { Array.new(8, NullPiece.instance) }
     end
 
     def [](pos)
