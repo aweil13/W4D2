@@ -1,4 +1,4 @@
-require_relative "piece.rb"
+require_relative "pieces"
 
 class Board
 
@@ -7,21 +7,21 @@ class Board
     ].freeze
     
     def populate
-        @board.map_with_index do |row, idx|
+        @board.map.with_index do |row, idx|
             if idx == 0
-                row.map_with_index { |pos, j|  BACK_ROW[j].new(:black, self, [idx,j]) }
+                row.map.with_index { |pos, j|  BACK_ROW[j].new(:black, self, [idx,j]) }
             elsif idx == 1
-                row.map_with_index { |pos, j|  Pawn.new(:black, self, [idx,j]) }
+                row.map.with_index { |pos, j|  Pawn.new(:black, self, [idx,j]) }
             elsif idx == 6
-                row.map_with_index { |pos, j|  Pawn.new(:white, self, [idx,j]) }
+                row.map.with_index { |pos, j|  Pawn.new(:white, self, [idx,j]) }
             elsif idx == 7 
-                row.map_with_index { |pos, j|  BACK_ROW[j].new(:white, self, [idx,j]) }
+                row.map.with_index { |pos, j|  BACK_ROW[j].new(:white, self, [idx,j]) }
             end
         end
     end
 
     def initialize
-        @board = Array.new(8) { Array.new(8, NullPiece.instance) }
+        @board = Array.new(8) { Array.new(8, NullPiece.new) }        
     end
 
     def [](pos)

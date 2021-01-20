@@ -1,0 +1,8 @@
+require "./Pieces/bishop.rb"
+require "./Pieces/king.rb"
+require "./Pieces/knight.rb"
+require "./Pieces/null_pieces.rb"
+require "./Pieces/pawn.rb"
+require "./Pieces/piece.rb"
+require "./Pieces/queen.rb"
+require "./Pieces/rook.rb"
