@@ -5,7 +5,7 @@ class Board
     def populate
         @board.map_with_index do |row, idx|
             if !(2..5).include?(idx)
-                row.map { |pos| pos = Piece.new }
+                row.map_with_index { |pos, j|  Piece.new("white", self, [idx,j]) }
             end
         end
     end

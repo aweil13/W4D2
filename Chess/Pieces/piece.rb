@@ -1,9 +1,9 @@
 class Piece
-    attr_reader :pos
+    attr_reader :pos, :color, :board
 
     def initialize(color, board, pos)
-        @board = Board.new
-        @color = self.symbol # question
+        @board = board
+        @color = color # question
         @pos = pos # array
     end
 

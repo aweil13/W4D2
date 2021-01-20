@@ -33,15 +33,19 @@ module Slideable
       
         # should return an array of places a Piece can move to
         def moves
-          dx = self.pos[0]
-          dy = self.pos[1]
+          currentx = self.pos[0]
+          currenty = self.pos[1]
+
+             move_dirs.each do |dir|
+                grow_unblocked_moves_in_dir(dir[])   
+
+
+
           moves_arr = grow_unblocked_moves_in_dir(dx, dy)                                  # create array to collect moves
-      
+          
                                             # iterate over each of the directions in which a slideable piece can move
                                             # use the Piece subclass' `#move_dirs` method to get this info
-                                            # for each direction, collect all possible moves in that direction
-                                             # and add them to your moves array 
-                                            # (use the `grow_unblocked_moves_in_dir` helper method)
+
       
                                             # return the final array of moves (containing all possible moves in all directions)
         end
@@ -58,19 +62,43 @@ module Slideable
         # this helper method is only responsible for collecting all moves in a given direction
         # the given direction is represented by two args, the combination of a dx and dy
         def grow_unblocked_moves_in_dir(dx, dy)
-            moves_arr = [] # create an array to collect moves
-            
-            possible_moves = [[dx, dy]]
+                       
+            horizontal_moves = [[dx, dy]]
               HORIZONTAL_DIRS.each do |pos| 
                 current_pos = [dx, dy]
                 row, col = pos 
-                until !valid_pos?(possible_moves[-1])
-                  current_pos = [dx + row, dy + col]
-                  possible_moves << current_pos
+                    until !valid_pos?(horizontal_moves[-1])
+                        current_pos = [dx + row, dy + col]
+                        next_tile = self.board[current_pos]
+                        if next_tile.is_a?(NullPiece)
+                        horizontal_moves << current_pos
+                        else
+                            if 
+                    end
+                horizontal_moves.pop if !valid_pos?(horizontal_moves[-1])
                 end
-                possible_moves.pop if !valid_pos?(possible_moves[-1])
+             end           
+             
+             diagonal_moves = [[dx, dy]]
+              DIAGONAL_DIRS.each do |pos| 
+                current_pos = [dx, dy]
+                row, col = pos 
+                    until !valid_pos?(diagonal_moves[-1])
+                        current_pos = [dx + row, dy + col]
+                        diagonal_moves << current_pos
+                    end
+                diagonal_moves.pop if !valid_pos?(diagonal_moves[-1])
                 end
-            end                            # get the piece's current row and current column
+             end                  
+            
+            if is.a?(Queen)
+                return horizontal_moves.concat(diagonal_moves)
+            elsif is.a?(Bishop)
+                return diagonal_moves
+            else
+                horizontal_moves
+            end
+                                        # get the piece's current row and current column
                                     
                                         # in a loop:
                                             # continually increment the piece's current row and current column to generate a new position
